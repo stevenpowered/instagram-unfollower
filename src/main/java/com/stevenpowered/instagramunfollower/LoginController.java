@@ -75,6 +75,9 @@ public class LoginController implements Initializable {
         linkAuthor.setOnMouseClicked(event -> {
             openWebpage("https://github.com/stevenpowered");
         });
+        linkSource.setOnMouseClicked(event -> {
+            openWebpage("https://github.com/stevenpowered/instagram-unfollower");
+        });
     }
 
     public static boolean openWebpage(URI uri) {
