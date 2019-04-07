@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stevenpowered.instagramunfollower.LoginController">
+    <children>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+                    <children>
+                        <JFXButton fx:id="btnLogin" defaultButton="true" styleClass="button-raised" text="Login" />
+                    </children>
+                </StackPane>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
+                    <children>
+                        <Label text="Instagram Unfollower">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <children>
+                        <JFXTextField fx:id="inputUsername" promptText="Username" style="-jfx-label-float: true;">
+                            <StackPane.margin>
+                                <Insets left="50.0" right="50.0" />
+                            </StackPane.margin>
+                        </JFXTextField>
+                    </children>
+                </StackPane>
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <children>
+                        <JFXTextField fx:id="inputPassword" promptText="Password" style="-jfx-label-float: true;">
+                            <StackPane.margin>
+                                <Insets left="50.0" right="50.0" />
+                            </StackPane.margin>
+                        </JFXTextField>
+                    </children>
+                </StackPane>
+            <GridPane GridPane.rowIndex="4">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Hyperlink fx:id="linkAuthor" text="stevenpowered" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Hyperlink fx:id="linkSource" text="GitHub Source" />
+                     </children>
+                  </StackPane>
+               </children>
+            </GridPane>
+            </children>
+        </GridPane>
+        <JFXDialog fx:id="dialog">
+           <content>
+               <JFXDialogLayout>
+                   <heading>
+                       <Label>Logging In</Label>
+                   </heading>
+                   <body>
+                       <JFXSpinner />
+                   </body>
+               </JFXDialogLayout>
+           </content>
+        </JFXDialog>
+    </children>
+</StackPane>
