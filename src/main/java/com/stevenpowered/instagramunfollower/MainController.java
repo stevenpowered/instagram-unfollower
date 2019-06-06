@@ -18,14 +18,14 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.brunocvcunha.instagram4j.Instagram4j;
-import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowersRequest;
-import org.brunocvcunha.instagram4j.requests.InstagramGetUserFollowingRequest;
-import org.brunocvcunha.instagram4j.requests.InstagramUnfollowRequest;
+import org.brunocvcunha.instagram4j.requests.*;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramGetUserFollowersResult;
+import org.brunocvcunha.instagram4j.requests.payload.InstagramSearchUsernameResult;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramUserSummary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class MainController implements Initializable {
     public JFXButton btnUnfollow;
     public GridPane gridPane;
 
-    private List<InstagramUserSummary> followers;
+    private List<InstagramUserSummary> followers = new ArrayList<>();
     private List<InstagramUserSummary> following;
     private List<InstagramUserSummary> notFollowingBack;
 
@@ -96,12 +96,28 @@ public class MainController implements Initializable {
 
     private void initData() throws IOException {
         Instagram4j instagram = InstagramUnfollower.getInstance().getInstagram();
-        InstagramGetUserFollowersResult followerRequest = instagram.sendRequest(new InstagramGetUserFollowersRequest(instagram.getUserId()));
-        followers = followerRequest.getUsers();
+
+        String nextMaxId = null;
+        while (true) {
+            InstagramGetUserFollowersResult fr = instagram.sendRequest(new InstagramGetUserFollowersRequest(instagram.getUserId(), nextMaxId));
+            List<InstagramUserSummary> users = fr.getUsers();
+            followers.addAll(users);
+            nextMaxId = fr.getNext_max_id();
+
+            if (nextMaxId == null) {
+                break;
+            }
+        }
+
         InstagramGetUserFollowersResult followingRequest = instagram.sendRequest(new InstagramGetUserFollowingRequest(instagram.getUserId()));
         following = followingRequest.getUsers();
-        List<Long> followersId = followers.stream().map(InstagramUserSummary::getPk).collect(Collectors.toList());
-        notFollowingBack = following.stream().filter(instagramUserSummary -> !followersId.contains(instagramUserSummary.getPk())).collect(Collectors.toList());
+        List<String> followersId = followers.stream().map(InstagramUserSummary::getUsername).collect(Collectors.toList());
+        notFollowingBack = following.stream().filter(instagramUserSummary -> {
+            if (!followersId.contains(instagramUserSummary.getUsername())) {
+                return true;
+            }
+            return false;
+        }).collect(Collectors.toList());
     }
 
 }

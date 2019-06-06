@@ -56,6 +56,7 @@ public class LoginController implements Initializable {
                     alert.setContent(layout);
                     alert.show();
                 } else {
+
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     try {
                         Parent parent = fxmlLoader.load(getClass().getResourceAsStream("/fxml/main.fxml"));
